@@ -19,6 +19,10 @@ def main():
         'channel_id': CHANNEL_ID,
         'search_word': 'incredible',
         'limit': 20,
+        # 'multi': 'single-thread',
+        'multi': 'multi-threading',
+        # 'multi': 'multi-processing',
+        'clean_up_download': False,
     }
 
     steps = [
