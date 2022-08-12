@@ -5,7 +5,7 @@ from yt_concate.settings import OUTPUTS_DIR
 
 def config_logger(level):
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)  # level 固定  # 所有軌道的base level, 如果權限高於其他軌道, 則以base level為主
+    logger.setLevel(logging.INFO)  # 所有軌道的base level, 如果權限高於其他軌道, 則以base level為主
 
     # 軌道: 檔案輸出
     logger_filepath = os.path.join(OUTPUTS_DIR, 'yt_concate_logging.log')
@@ -24,5 +24,3 @@ def config_logger(level):
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
 
-    # logger.info('測試logging info')
-    # logger.error('測試logging warning')
