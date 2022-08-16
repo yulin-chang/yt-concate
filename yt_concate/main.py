@@ -52,18 +52,25 @@ def get_args(inputs):
         elif opt in ("-l", "--limit"):
             inputs['limit'] = int(arg)
         elif opt in ("-f", "--fast"):
-            inputs['fast'] = str(arg).lower()
+            inputs['fast'] = arg
         elif opt == '--cleanup':  # cleanup沒縮寫, 不允許接arg
             inputs['clean_up_download'] = True
         elif opt == '--level':  # level沒縮寫
-            inputs['level'] = str(arg).upper()
+            inputs['level'] = arg
 
     # channel_id, search_word, limit 防呆是否為empty
     if not inputs['channel_id'] or not inputs['search_word'] or not inputs['limit']:
         print_usage()
         sys.exit(2)
 
+    # limit 防呆是否為數值
+    if not isinstance(inputs['limit'], int):
+        print_usage()
+        sys.exit(2)
+
     # fast 防呆與assign bool True/False
+    # 預設為True, 需轉為小寫
+    inputs['fast'] = str(inputs['fast']).lower()
     if inputs['fast'] in ["true", "false"]:
         inputs['fast'] = inputs['fast'] == "true"
     else:
@@ -71,6 +78,7 @@ def get_args(inputs):
         sys.exit(2)
 
     # level 防呆
+    inputs['level'] = str(inputs['level']).upper()
     if not inputs['level'] in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
         print_usage()
         sys.exit(2)
